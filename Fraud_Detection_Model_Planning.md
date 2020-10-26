@@ -8,3 +8,5 @@ This project has three goals:
 1.  Determine if multiple models are needed for detecting different variations of fraud.
 2.  Identify features that are most likely to influence a fraud detection model.
 3.  Estimate if training a model on Day 1 data will be sufficient for detecting fraud on Day2.
+
+![](intro_fig.png) 
