@@ -4,6 +4,7 @@ import numpy as np
 def bootstrap_mean(df, statistic, samples=500):
     """
     Returns an pandas series of mean bootstrap values for the statistic
+    for each of the columns in the dataframe.
 
     Parameters
     ----------
@@ -31,11 +32,11 @@ def bootstrap_mean(df, statistic, samples=500):
     return df_bootstrap.mean()
 
 
-if __name__ == '__main__':
-    data = pd.read_csv("data/creditcard.csv")
+# if __name__ == '__main__':
+#     data = pd.read_csv("data/creditcard.csv")
     
-    Features = ['V%d' % n for n in range(1, 29)]
-    df_fraud = data[Features][data['Class']==1]
+#     Features = ['V%d' % n for n in range(1, 29)]
+#     df_fraud = data[Features][data['Class']==1]
 
-    b = bootstrap_mean(df_fraud, statistic='mean')
-    print(b)
+#     b = bootstrap_mean(df_fraud, statistic='mean')
+#     print(b)
