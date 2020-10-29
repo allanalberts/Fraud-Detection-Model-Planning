@@ -32,6 +32,32 @@ def bootstrap_mean(df, statistic, samples=500):
     return df_bootstrap.mean()
 
 
+
+def ttest(sample1, sample2, Features):
+    """
+    Returns a dataframe with a single row containing the p values for each Feature when sample1
+    is compared against sample2. Features are columns in the dataframe.
+
+    Parameters
+    ----------
+    sample1: Pandas dataframe represting the sample transactions and their associated features.
+    sample2: Pandas dataframe represting the sample transactions and their associated features.
+    Features: List of column names from input dataframes that are to be evaluated.
+
+    Returns
+    -------
+    Pandas DataFrame
+    """
+
+    p_lst = []
+    for f in Features:
+        stat, p_val = stats.ttest_ind(sample1[f], sample2[f], equal_var=False)  
+        p_lst.append(p_val)
+    df = pd.DataFrame(p_lst, index=Features)
+    return df.T
+
+
+# probably more below to another function:
 # if __name__ == '__main__':
 #     data = pd.read_csv("data/creditcard.csv")
     
