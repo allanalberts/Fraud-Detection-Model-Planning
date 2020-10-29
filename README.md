@@ -7,24 +7,29 @@ The dataset used in the project contains transactions made by credit cards in Se
 The potential model effectiveness will be compared by independently evaluating the 28 fraud detection features and determine which ones best distinguish fraud and non-fraud transactions when transactions are segmented by amount vs. viewed as a single population. 
 
 ![](/img/overview.png) 
+
 ### Types of Fraud
 
-![](img/AmountPlot.png)
-3.5x greater and 52x greater than the average
+![](/img/AmountPlot.png)
 
-
+#### Add Text here  
+- 3.5x greater and 52x greater than the average
 - describe why peak dollar amounts are occurring (rule based and testing). 
+
 ### Hypothesis:
 The Hypothesis that we will be exploring is if there is evidence that there will be a difference in fraud detection performance from two models built on different features and utilizing data from different transaction groups (over a dollar vs equal to or lower than a dollar). This hypthosesis will be initially validated by estimating differences in feature importance based on the p-value obtained from independently comparing the fraud to non-fraud transactions for each feature. 
+
+
 
 
 ### Feature Importance:
 Feature importance is estimated based on a lack of similarity between the distributions of the fraud and non-fraud samples. A low p-value will indicate that the distributions are very different for the specific feature and therefore a model utilizing this feature will have a good likelihood of correctly classifying the transactions as fraud vs. non-fraud.
 
-< insert visual>
+#### insert plot here
 
-- summary - in addition to detecting differently, may want different thesholds on the precision recall curve for tolerance lower accuracy tolerance at low dollar amounts (losses not as high and manual labor is a limited resource)
+### Conclusing
+summary - in addition to detecting differently, may want different thesholds on the precision recall curve for tolerance lower accuracy tolerance at low dollar amounts (losses not as high and manual labor is a limited resource)
 
-
+#### insert plot here
 
 
