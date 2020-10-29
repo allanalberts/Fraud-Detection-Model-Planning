@@ -6,10 +6,10 @@ The dataset used in the project contains transactions made by credit cards in Se
 
 The potential model effectiveness will be compared by independently evaluating the 28 fraud detection features and determine which ones best distinguish fraud and non-fraud transactions when transactions are segmented by amount vs. viewed as a single population. 
 
-![](../img/overview.png) 
+![](/img/overview.png) 
 ### Types of Fraud
 
-![](../img/AmountPlot.png)
+![](img/AmountPlot.png)
 3.5x greater and 52x greater than the average
 
 
