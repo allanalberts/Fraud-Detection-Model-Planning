@@ -10,7 +10,7 @@ The potential model effectiveness will be compared by independently evaluating t
 
 ### Types of Fraud
 
-![](/img/AmountPlot.png)
+![](/img/AmountPlots.png)
 
 #### Add Text here  
 - 3.5x greater and 52x greater than the average
