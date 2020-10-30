@@ -25,8 +25,6 @@ The other anomaly occurs at $1 and below. There are 3.5 times more fraud than no
 ### Fraud Features
 The dataset also includes 28 potential fraud prediction features which have been anomynized through a PCA dimensionality reduction transformation in order to maintain confidentiality of the data. The impact of these features on model effectiveness will be measured by independently evaluating each one to determine how well they distinguish distributions of fraud and non-fraud transactions. 
 
-- maybe show multiple hist plots of the features???
-
 
 ### Identifying Relevant Fraud Detection Features
 Feature importance will be estimated based on a lack of similarity between the distributions of the fraud and non-fraud samples as determined from an independent t-test for each feature. A low p-value will indicate that the distributions are very different for the specific feature and therefore a model utilizing this feature will have a good likelihood of correctly classifying transactionss as fraud vs. non-fraud.
@@ -40,11 +38,11 @@ Using an extremely low p-value threshold of 0.001 for identifying featurees that
  
 V1, V2, V3, V4, V5, V6, V7, V9, V10, V11, V12, V14, V16, V17, V18, V20
 
-The low value model will benefit from the addition features V15, V24, V26.
+The low amount model will benefit from the addition features V15, V24, V26.
 
-The low value model will benefit from the addition features V8, V19, V21. 
+The high amount model will benefit from the addition features V8, V19, V21. 
 
-Raising the p-value threshold to 0.01 results in 2 addition features added to the low model (V13 an V28).
+Raising the p-value threshold to 0.01 results in 2 addition features added to the low model: V13 and V28.
 
 ### Conclusion
 I found that multiple predictive models would likely produce better overall fraud identification based on usage of features that are relevant for each tranaction amount segment. If further analysis is desired, one could also compare the differences in the standard deviation and median values between non-fraud transaction and a bootstrap of the fraud transactions.
