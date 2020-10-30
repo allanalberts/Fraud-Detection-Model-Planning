@@ -14,20 +14,22 @@ The dataset comes courtesy of Kaggle and has been collected and analysed during 
 
 
 ## Inspecting the Fraud
-The data set contains from fraud transaction ranging in value from $0 to over $2000. However, almost 80% of the fraud transactions are under $100  representing approximately 15% of the overall fraud dollars (green area of chart). 
+The data set contains fraud transaction ranging in value from $0 to over $2000. However, almost 80% of the fraud transactions are under $100  representing approximately 15% of the overall fraud dollars (green area of chart on left). 
 
 ![](/img/AmountPlots.png)
 
-Looking closer at the fraud transactions that under $100, we see two anomalous spikes (green chart).
+Looking closer at the fraud transactions that under $100, we see two anomalous spikes (green chart on right).
 
 There are an excessive amount of fraud transactions occurring at $99.99. In fact, there are 58 times as many fraud purchases as legitimate purchases at this price point. This anomaly is indicative of a merchant that uses a rule based fraud detection system instead of a machine learning model. The fraudsters have figured out that the merchant reviews transactions at a $100 of more, so they attempt fraudulent purchases just under this threshold. 
 
 The other anomaly occurs at $1 and below. There are 3.5 times more fraud than non-fraud transactions in this price range. Fraud done at very low dollar amounts serves a different purpose than fraud that is being directly monetized. Fraudsters use these low transaction amounts to test accounts to see if they have already been closed. They will then use the active accounts to make a higher value purchase. 
 
+This project will test the potential improvement in fraud detection by creating two predictive models. One based on transactions that are at or below $1 and the other based on transactions above $1. 
 
 ## Fraud Features
 The dataset also includes 28 potential fraud prediction features which have been anomynized through a PCA dimensionality reduction transformation in order to maintain confidentiality of the data. The impact of these features on model effectiveness will be measured by independently evaluating each one to determine how well they distinguish distributions of fraud and non-fraud transactions. 
 
+The hypothesis is that low and high transaction amount models will perform better individually as each represents a different type of fraud that may be represented differently by the fraud detection features.
 
 ## Identifying Relevant Fraud Detection Features
 Feature importance will be estimated based on a lack of similarity between the distributions of the fraud and non-fraud samples as determined from an independent t-test for each feature. A low p-value will indicate that the distributions are very different for the specific feature and therefore a model utilizing this feature will have a good likelihood of correctly classifying transactionss as fraud vs. non-fraud.
