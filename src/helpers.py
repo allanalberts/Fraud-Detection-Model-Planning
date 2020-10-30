@@ -54,8 +54,9 @@ def ttest(sample1, sample2, Features):
     for f in Features:
         stat, p_val = stats.ttest_ind(sample1[f], sample2[f], equal_var=False)  
         p_lst.append(p_val)
-    df = pd.DataFrame(p_lst, index=Features)
-    return df.T
+    df = pd.DataFrame(p_lst, index=Features).reset_index()
+    df.columns = ['Feature','p_val']
+    return df
 
 def fraud_rate(TranAmt, data, cummulative=False):
     '''

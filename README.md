@@ -10,6 +10,9 @@ The dataset used in the project contains transactions made by credit cards in Se
 
 ![](/img/overview.png) 
 
+The dataset comes courtesy of Kaggle and has been collected and analysed during a research collaboration of Worldline and the Machine Learning Group (http://mlg.ulb.ac.be) of ULB (Université Libre de Bruxelles) on big data mining and fraud detection.
+
+
 ### Inspecting the Fraud
 The data set contains from fraud transaction ranging in value from $0 to over $2000. However, almost 80% of the fraud transactions are under $100  representing approximately 15% of the overall fraud dollars (green area of chart). 
 
