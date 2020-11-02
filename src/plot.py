@@ -8,12 +8,12 @@ import matplotlib.gridspec as gs
 
 def plot_pval_for_model(ax, grp1, grp2, Features, title):
     '''
-        Prints individual plot of p-values for each feature
+        Prints individual plot of p-values for each feature. 
         
         ARGS:
             ax - axis to print on
-            grp1 - first group to compare with ttest
-            grp2 - second group to compare with ttest
+            grp1 - pandas dataframe containing sample of dataset for ttest comparison
+            grp2 - pandas dataframe containing sample of dataset for ttest comparison
             Features - features to plot
             title - plot title
 
@@ -63,7 +63,7 @@ def plot_dataset_overview(data):
         Return:
             None
     '''    
-    trends = data[['Time','Amount','Class']]
+    trends = data[['Time','Amount','Class']].copy()
     trends['TimeSeries'] = pd.to_datetime(trends.Time, unit='s', origin='2013-09-01')
     trends.set_index('TimeSeries', drop=False, inplace=True)
 
@@ -93,7 +93,7 @@ def graph_amount_cdf(ax, x, y1, y2, ymax):
             ax - plot axis
             x - list of features names to plot against
             y1 - list of cummulative amounts for fraud transactions
-            y2 - cdf of fraud transactions
+            y2 - list containing cdf values for fraud transactions
             ymax - the upper limit for y axis on plot
            
         Return:
@@ -136,7 +136,7 @@ def amount_cdf_data(data):
         Return:
             x - list of features names to plot against
             y1 - list of cummulative amounts for fraud transactions
-            y2 - cdf of fraud transactions
+            y2 - list of cdf values for fraud transactions
     '''  
     max_amt = data['Amount'].max()
     transaction_cnt = data['Amount'].count()
@@ -149,20 +149,25 @@ def amount_cdf_data(data):
     ymax = np.max(y1)
     return x, y1, y2, ymax
 
-def graph_amounts_frequency(ax, y2, data, xlimit):
+def graph_amounts_frequency(ax, data, xlimit):
     '''
         Creates plots showing frequency of fraud at different transaction amounts
         
         ARGS:
             ax - plot axis
             y2 - list of cdf values to plot
-            data -> pandas df
-            xlimit -> x-axis graph upper limit
+            data - pandas df
+            xlimit - x-axis graph upper limit
            
         Return:
             ax - axis with plot
     '''    
-    gr_data = data.copy()
+    transaction_cnt = data['Amount'].count()
+    y2 = []
+    for n in range(102):
+        y2.append(((data[data['Amount']<(.01*n*xlimit)]['Amount'].count())/transaction_cnt)*100)
+    
+    gr_data = data[data['Class']==1].copy()
     gr_data[gr_data['Amount']<xlimit]['Amount'].hist(ax=ax, bins=100, color='red', alpha=0.7)
     ax.set_title("Frequency of Fraud by Transaction Dollar Amount (0-100)", fontsize=20)
     ax.set_xlabel('Fraud Transaction Amount')
@@ -179,8 +184,8 @@ def plot_fraud_amount_eda(data, gs):
         Creates image with multiple plots for Fraud Amount EDA Visualatioin
         
         ARGS:
-            data -> pandas df
-            gs -> Gridspec
+            data - pandas df
+            gs - instantiated Gridspec
            
         Return:
             None
@@ -195,7 +200,7 @@ def plot_fraud_amount_eda(data, gs):
     graph_amount_cdf(ax1, x, y1, y2, ymax)
 
     ax2 = fig.add_subplot(gs[1:])
-    graph_amounts_frequency(ax2, y2, data=df_fraud, xlimit=100)
+    graph_amounts_frequency(ax2, data, xlimit=100)
 
     plt.tight_layout()
     fig.savefig("../img/AmountPlots.png")
@@ -203,8 +208,7 @@ def plot_fraud_amount_eda(data, gs):
 
 
 if __name__ == '__main__':
-    data = pd.read_csv("../data/creditcard.csv")
-    Features = ['V%d' % n for n in range(1, 29)]
+    data, Features = h.load_data("../data/creditcard.csv")
 
     # create p-value comparison plot: features_pval.png
     plot_pval_all(data, amount_threshold=1.00)
